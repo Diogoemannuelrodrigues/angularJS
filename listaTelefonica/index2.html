@@ -114,8 +114,6 @@
                 console.log(isContatoSelecionado);
             };
 
-
-
         });
     </script>
 </head>
@@ -141,53 +139,60 @@
         <div class="">
             <img src="lista-telefonica.png" style="width:90px;height:90px;">
         </div>
-        <table class="table table">
-            <tr>
-                <th>
-                    <class="fas fa-check-square">
-                        </i>
-                </th>
-                <th>Nome</th>
-                <th>Telefone</th>
-                <th>Operadora</th>
-                <th>Cor</th>
-                <th>Teste</th>
-            </tr>
-            <tr ng-class="{'selecionado negrito': contato.selecionado}" ng-repeat="contato in contatos">
-                <td><input type="checkbox" ng-model="contato.selecionado" /></td>
-                <td>{{contato.nome}}</td>
-                <td>{{contato.telefone}}</td>
-                <td>{{contato.operadora.nome}}</td>
-                <td>
-                    <div style="width: 20px; height: 20px;" ng-style="{'background-color': contato.cor}"></div>
-                </td>
-            </tr>
-        </table>
-        <hr/>
-        <form name="contatoForm">
-            <input class="form-control" ng-required="true" name="nome" type="text" ng-model="contato.nome" placeholder="Nome" ng-minlength="6" />
-            <input class="form-control" ng-required="true" name="telefone" type="text" ng-model="contato.telefone" placeholder="Telefone" />
-            <input class="form-control" type="text" ng-model="contato.cor" placeholder="Cor" />
-            <!--  <select class="form-control"  ng-model="contato.cores" ng-options="cor.nome for cor in cores"">
+        <br>
+        <h5>Buscar contato
+            <h5>
+                <input placeholder="Quem vc quer buscar??" ng-model="criterioDeBusca" class="form-control" type="text">
+
+                <table class="table table">
+                    <tr>
+                        <th>
+                            <class="fas fa-check-square">
+                                </i>
+                        </th>
+                        <th>Nome</th>
+                        <th>Telefone</th>
+                        <th>Operadora</th>
+                        <th>Cor</th>
+                    </tr>
+                    <tr ng-class="{'selecionado negrito': contato.selecionado}" ng-repeat="contato in contatos | filter: criterioDeBusca | orderBy: 'nome'">
+                        <td><input type="checkbox" ng-model="contato.selecionado" /></td>
+                        <td>{{contato.nome}}</td>
+                        <td>{{contato.telefone}}</td>
+                        <td>{{contato.operadora.nome}}</td>
+                        <td>
+                            <div style="width: 20px; height: 20px;" ng-style="{'background-color': contato.cor}"></div>
+                        </td>
+                    </tr>
+                </table>
+                <hr/>
+                <form name="contatoForm">
+                    <input class="form-control" ng-required="true" name="nome" type="text" ng-model="contato.nome" placeholder="Nome" ng-minlength="6" />
+                    <input class="form-control" ng-required="true" name="telefone" ng-pattern="/^\d{4,5}-\d{4}$/" type="text" ng-model="contato.telefone" placeholder="Telefone" />
+                    <input class="form-control" type="text" ng-model="contato.cor" placeholder="Cor" />
+                    <!--  <select class="form-control"  ng-model="contato.cores" ng-options="cor.nome for cor in cores"">
         <option value="">Selecione uma cor</option>
     </select> -->
-        </form>
-        <div ng-show="contatoForm.nome.$error.required && contatoForm.nome.$dirty" class="alert alert-danger">
-            Por favor, preencha o campo nome.
-        </div>
-        <div ng-show="contatoForm.nome.$error.minlength && contatoForm.nome.$dirty" class="alert alert-danger">
-            O campo nome deve ter mais de 6 caracteres.
-        </div>
-        <div ng-show="contatoForm.telefone.$invalid && contatoForm.telefone.$dirty" class="alert alert-danger">
-            Por favor, preencha o campo telefone.
-        </div>
-        <select class="form-control" ng-model="contato.operadora" ng-options="operadora.codigo for operadora in operadoras">
+                </form>
+                <div ng-show="contatoForm.nome.$error.required && contatoForm.nome.$dirty" class="alert alert-danger">
+                    Por favor, preencha o campo nome.
+                </div>
+                <div ng-show="contatoForm.nome.$error.minlength && contatoForm.nome.$dirty" class="alert alert-danger">
+                    O campo nome deve ter mais de 6 caracteres.
+                </div>
+                <div ng-show="contatoForm.telefone.$error.required && contatoForm.telefone.$dirty" class="alert alert-danger">
+                    Por favor, preencha o campo telefone.
+                </div>
+                <div ng-show="contatoForm.telefone.$error.pattern && contatoForm.telefone.$dirty" class="alert alert-danger">
+                    Preencha corretamento o campo telefone. EX: 00000-0000.
+                </div>
+                <select class="form-control" ng-model="contato.operadora" ng-options="operadora.nome for operadora in operadoras | orderBy: 'nome'">
     <option value="">Selecione uma operadora</option>
 </select>
-        <!-- ng-disabled="!contato.nome || !contato.telefone" - validaão para o campo de adicionar-->
-        <button class="btn btn-block btn-primary" ng-click="salvar(contato)" ng-disabled="contatoForm.$invalid">
+                <!-- ng-disabled="!contato.nome || !contato.telefone" - validaão para o campo de adicionar-->
+                <button class="btn btn-block btn-primary" ng-click="salvar(contato)" ng-disabled="contatoForm.$invalid">
     Adicionar contato</button>
-        <button class="btn btn-block btn-danger" ng-click="delete(contatos)" ng-show="isContatoSelecionado(contatos)">Delete contato</button>
+                <button class="btn btn-block btn-danger" ng-click="delete(contatos)" ng-show="isContatoSelecionado(contatos)">Delete contato</button>
 
     </div>
     <div style="text-align: center;">
