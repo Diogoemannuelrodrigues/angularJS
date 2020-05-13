@@ -1,0 +1,198 @@
+<html ng-app="listaTelefonica">
+<html>
+
+<head>
+    <meta charset='utf-8'>
+    <title>Lista Telefonica</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <style>
+        .jumbotron {
+            width: 600px;
+            text-align: center;
+            margin-top: 20px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .table {
+            margin-top: 20px;
+        }
+        
+        .form-control {
+            margin-bottom: 5px;
+        }
+        
+        .btn-primary {
+            margin-top: 15px;
+        }
+        
+        .input-group-append {
+            margin-left: auto;
+            margin-right: auto;
+        }
+        /*   .selecionado {
+            background-color: yellow;
+        } */
+        
+        .negrito {
+            font-weight: bold;
+        }
+        
+        .navbar-brand {
+            text-align: center;
+        }
+    </style>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script src='angular/angular.js'></script>
+    <script>
+        angular.module("listaTelefonica", []);
+        angular.module("listaTelefonica").controller("listaTelefonicaCtrl", function($scope) {
+            $scope.app = "Lista Telefonica";
+            $scope.contatos = [{
+                nome: "Pedro Campos",
+                telefone: "99999-5252",
+                cor: "aqua"
+            }, {
+                nome: "Ana Claudia",
+                telefone: "99569-5252",
+                cor: "yellow"
+            }, {
+                nome: "Jeane Linda",
+                telefone: "99129-5252",
+                cor: "green"
+            }, {
+                nome: "Maria Júlia",
+                telefone: "99934-5252",
+                cor: "red"
+            }]
+
+            /*     $scope.cores = [
+            {nome: "blue"},
+            {nome: "yelllow"},
+            {nome: "green"},
+            {nome: "red"}
+        ]
+ */
+            $scope.operadoras = [{
+                    nome: "OI",
+                    codigo: 14
+                }, {
+                    nome: "CLARO",
+                    codigo: 61
+                }, {
+                    nome: "TIM",
+                    codigo: 41
+                }, {
+                    nome: "VIVO",
+                    codigo: 51
+                }
+
+            ];
+
+            $scope.salvar = function(contato) {
+                $scope.contatos.push(angular.copy(contato));
+                delete $scope.contato;
+                $scope.contatoForm.$setPristine();
+            }
+
+            $scope.delete = function(contato) {
+                $scope.contatos.delete
+            }
+
+            $scope.delete = function(contatos) {
+                $scope.contatos = contatos.filter(function(contato) {
+                    if (!contato.selecionado) return contato;
+                });
+            };
+
+            $scope.isContatoSelecionado = function(contatos) {
+                return contatos.some(function(contato) {
+                    return contato.selecionado;
+                });
+                console.log(isContatoSelecionado);
+            };
+
+
+
+        });
+    </script>
+</head>
+
+<body ng-controller="listaTelefonicaCtrl">
+
+    <!--  <nav ng-class="navbar navbar-light bg-light">
+        <a class="navbar-brand">
+          {{app}}
+        </a>
+      </nav> -->
+
+
+    <nav class="navbar navbar-light bg-light">
+        <a class="navbar-brand">
+          {{app}}
+        </a>
+    </nav>
+
+
+    <div class="jumbotron">
+        <h4>{{app}}</h4>
+        <div class="">
+            <img src="lista-telefonica.png" style="width:90px;height:90px;">
+        </div>
+        <table class="table table">
+            <tr>
+                <th>
+                    <class="fas fa-check-square">
+                        </i>
+                </th>
+                <th>Nome</th>
+                <th>Telefone</th>
+                <th>Operadora</th>
+                <th>Cor</th>
+                <th>Teste</th>
+            </tr>
+            <tr ng-class="{'selecionado negrito': contato.selecionado}" ng-repeat="contato in contatos">
+                <td><input type="checkbox" ng-model="contato.selecionado" /></td>
+                <td>{{contato.nome}}</td>
+                <td>{{contato.telefone}}</td>
+                <td>{{contato.operadora.nome}}</td>
+                <td>
+                    <div style="width: 20px; height: 20px;" ng-style="{'background-color': contato.cor}"></div>
+                </td>
+            </tr>
+        </table>
+        <hr/>
+        <form name="contatoForm">
+            <input class="form-control" ng-required="true" name="nome" type="text" ng-model="contato.nome" placeholder="Nome" ng-minlength="6" />
+            <input class="form-control" ng-required="true" name="telefone" type="text" ng-model="contato.telefone" placeholder="Telefone" />
+            <input class="form-control" type="text" ng-model="contato.cor" placeholder="Cor" />
+            <!--  <select class="form-control"  ng-model="contato.cores" ng-options="cor.nome for cor in cores"">
+        <option value="">Selecione uma cor</option>
+    </select> -->
+        </form>
+        <div ng-show="contatoForm.nome.$error.required && contatoForm.nome.$dirty" class="alert alert-danger">
+            Por favor, preencha o campo nome.
+        </div>
+        <div ng-show="contatoForm.nome.$error.minlength && contatoForm.nome.$dirty" class="alert alert-danger">
+            O campo nome deve ter mais de 6 caracteres.
+        </div>
+        <div ng-show="contatoForm.telefone.$invalid && contatoForm.telefone.$dirty" class="alert alert-danger">
+            Por favor, preencha o campo telefone.
+        </div>
+        <select class="form-control" ng-model="contato.operadora" ng-options="operadora.codigo for operadora in operadoras">
+    <option value="">Selecione uma operadora</option>
+</select>
+        <!-- ng-disabled="!contato.nome || !contato.telefone" - validaão para o campo de adicionar-->
+        <button class="btn btn-block btn-primary" ng-click="salvar(contato)" ng-disabled="contatoForm.$invalid">
+    Adicionar contato</button>
+        <button class="btn btn-block btn-danger" ng-click="delete(contatos)" ng-show="isContatoSelecionado(contatos)">Delete contato</button>
+
+    </div>
+    <div style="text-align: center;">
+        Create by: <b>Diogo Emannuel</b>
+    </div>
+</body>
+
+</html>
