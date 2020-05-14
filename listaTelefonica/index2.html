@@ -5,123 +5,15 @@
     <meta charset='utf-8'>
     <title>Lista Telefonica</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <style>
-        .jumbotron {
-            width: 600px;
-            text-align: center;
-            margin-top: 20px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-        
-        .table {
-            margin-top: 20px;
-        }
-        
-        .form-control {
-            margin-bottom: 5px;
-        }
-        
-        .btn-primary {
-            margin-top: 15px;
-        }
-        
-        .input-group-append {
-            margin-left: auto;
-            margin-right: auto;
-        }
-        /*   .selecionado {
-            background-color: yellow;
-        } */
-        
-        .negrito {
-            font-weight: bold;
-        }
-        
-        .navbar-brand {
-            text-align: center;
-        }
-    </style>
+    <link rel="stylesheet" href="css/app.css">
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     <script src='angular/angular.js'></script>
+    <script src='js/app.js'></script>
+    <script src='js/controller/listaTelefonicaCTRL.js'></script>
+
     <script>
-        angular.module("listaTelefonica", []);
-        angular.module("listaTelefonica").controller("listaTelefonicaCtrl",
-            function($scope, $http) {
-                $scope.app = "Lista Telefonica";
-                $scope.contatos = [{
-                    nome: "Pedro Campos",
-                    telefone: "99999-5252",
-                    cor: "aqua"
-                }, {
-                    nome: "Ana Claudia",
-                    telefone: "99569-5252",
-                    cor: "yellow"
-                }, {
-                    nome: "Jeane Linda",
-                    telefone: "99129-5252",
-                    cor: "green"
-                }, {
-                    nome: "Maria Júlia",
-                    telefone: "99934-5252",
-                    cor: "red"
-                }]
-
-                /*     $scope.cores = [
-            {nome: "blue"},
-            {nome: "yelllow"},
-            {nome: "green"},
-            {nome: "red"}
-        ] 
- */
-
-                /*     var carregaContatosDoBackEnd = function() {
-                        $http.get("Uma URL").sucess(function(data, status) {
-                            $scope.contatos = data;
-                        });
-                    } */
-                $scope.operadoras = [{
-                        nome: "OI",
-                        codigo: 14
-                    }, {
-                        nome: "CLARO",
-                        codigo: 61
-                    }, {
-                        nome: "TIM",
-                        codigo: 41
-                    }, {
-                        nome: "VIVO",
-                        codigo: 51
-                    }
-
-                ];
-
-                $scope.salvar = function(contato) {
-                    $scope.contatos.push(angular.copy(contato));
-                    delete $scope.contato;
-                    $scope.contatoForm.$setPristine();
-                }
-
-                $scope.delete = function(contato) {
-                    $scope.contatos.delete
-                }
-
-                $scope.delete = function(contatos) {
-                    $scope.contatos = contatos.filter(function(contato) {
-                        if (!contato.selecionado) return contato;
-                    });
-                };
-
-                $scope.isContatoSelecionado = function(contatos) {
-                    return contatos.some(function(contato) {
-                        return contato.selecionado;
-                    });
-                    console.log(isContatoSelecionado);
-                };
-
-            });
     </script>
 </head>
 
