@@ -12,6 +12,7 @@
     <script src='angular/angular.js'></script>
     <script src='js/app.js'></script>
     <script src='js/controller/listaTelefonicaCTRL.js'></script>
+    <script src='js/services/serialGenerateService.js'></script>
 
     <script>
     </script>
@@ -49,6 +50,7 @@
                             <class="fas fa-check-square">
                                 </i>
                         </th>
+                        <th>Serial</th>
                         <th>Nome</th>
                         <th>Telefone</th>
                         <th>Operadora</th>
@@ -56,6 +58,7 @@
                     </tr>
                     <tr ng-class="{'selecionado negrito': contato.selecionado}" ng-repeat="contato in contatos | filter: criterioDeBusca | orderBy: 'nome'">
                         <td><input type="checkbox" ng-model="contato.selecionado" /></td>
+                        <td>{{contato.serial}}</td>
                         <td>{{contato.nome}}</td>
                         <td>{{contato.telefone}}</td>
                         <td>{{contato.operadora.nome}}</td>

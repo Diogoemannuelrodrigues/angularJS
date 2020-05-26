@@ -1,5 +1,6 @@
 angular.module("listaTelefonica").controller("listaTelefonicaCtrl",
-    function($scope, $http) {
+    function($scope, $http, serialGenerateService) {
+        console.log(serialGenerateService.generate());
         $scope.app = "Lista Telefonica";
         $scope.contatos = [{
             nome: "Pedro Campos",
@@ -49,6 +50,7 @@ angular.module("listaTelefonica").controller("listaTelefonicaCtrl",
         ];
 
         $scope.salvar = function(contato) {
+            contato.serial = serialGenerateService.generate();
             $scope.contatos.push(angular.copy(contato));
             delete $scope.contato;
             $scope.contatoForm.$setPristine();
