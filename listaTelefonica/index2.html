@@ -13,6 +13,7 @@
     <script src='js/app.js'></script>
     <script src='js/controller/listaTelefonicaCTRL.js'></script>
     <script src='js/services/serialGenerateService.js'></script>
+    <script src='js/filters/nameFilter.js'></script>
 
     <script>
     </script>
@@ -59,7 +60,7 @@
                     <tr ng-class="{'selecionado negrito': contato.selecionado}" ng-repeat="contato in contatos | filter: criterioDeBusca | orderBy: 'nome'">
                         <td><input type="checkbox" ng-model="contato.selecionado" /></td>
                         <td>{{contato.serial}}</td>
-                        <td>{{contato.nome}}</td>
+                        <td>{{contato.nome | name}}</td>
                         <td>{{contato.telefone}}</td>
                         <td>{{contato.operadora.nome}}</td>
                         <td>

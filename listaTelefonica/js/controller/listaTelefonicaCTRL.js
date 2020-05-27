@@ -1,6 +1,6 @@
 angular.module("listaTelefonica").controller("listaTelefonicaCtrl",
     function($scope, $http, serialGenerateService) {
-        console.log(serialGenerateService.generate());
+        /*  console.log(serialGenerateService.generate()); */
         $scope.app = "Lista Telefonica";
         $scope.contatos = [{
             nome: "Pedro Campos",
@@ -18,6 +18,10 @@ angular.module("listaTelefonica").controller("listaTelefonicaCtrl",
             nome: "Maria Júlia",
             telefone: "99934-5252",
             cor: "red"
+        }, {
+            nome: "faria Júlia",
+            telefone: "99934-5252",
+            cor: "black"
         }]
 
         /*     $scope.cores = [
